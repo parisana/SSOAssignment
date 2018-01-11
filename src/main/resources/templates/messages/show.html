@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Compose Message</title>
+    <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-beta/css/bootstrap.min.css}">
+    <script th:src="@{/webjars/bootstrap/4.0.0-beta/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-light bg-faded" th:with="currentUser=${currentUser}">
+        <div class="navbar" style="width:100%" th:if="${currentUser!=null}">
+            <ul class="navbar-nav" style="display:inline">
+                <li style="display:inline; padding:0 5px 10px 5px"><a th:href="@{/messages/inbox}">Inbox</a></li>
+                <li style="display:inline; padding:5px 10px"><a th:href="@{/messages/compose(form)}">Compose</a></li>
+                <li style="display:inline; padding:5px 10px"><a th:href="@{/h2-console}">H2-DB</a></li>
+            </ul>
+            <div  style="float:right; display:inline-block; margin-left:auto">
+                <div  style="float:left; display:inline-block; margin-left:auto; padding: 5px 10px">
+                    <h6 class="navbar-text" th:text="${currentUser.firstName}">sample_user</h6>
+                </div>
+                <form class="form-inline" th:action="@{/logout}" method="post">
+                    <button class="btn btn-primary" type="submit">Log-out</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="segment-message" style="border-top:1px solid #333; border-bottom:1px solid #333; height:auto">
+        <h2 style="padding: 5px">Summary : <span th:text="${message.summary}">A short summary...</span></h2>
+        <!--<div class="subsegment" style="padding: 10px; width:100%;"></div>-->
+        <div class="segment-container" style="padding: 5px 10px; border: 1px solid #333; width:100%; min-height:200px">
+            <div class="subsegment-left" style="display: inline-block; width:30%; float:left; height:100%">
+                <div class="card-title">ID: </div>
+                <div class="card-title">Date</div>
+                <div class="card-title">Message</div>
+            </div>
+            <div class="subsegment-right" style="display: inline-block; width:60%; float:left; height:100%">
+                <div class="card-title" id="id" th:text="${message.id}">123</div>
+                <div class="card-title" id="created" th:text="${#calendars.format(message.created)}">July 11, 2012 2:17:16 PM CDT</div>
+                <div class="card-title" style="overflow-x:wrap" id="text" th:text="${message.text}">A detailed message that is longer than the summary.</div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

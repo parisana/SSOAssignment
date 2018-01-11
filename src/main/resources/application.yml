@@ -1,0 +1,16 @@
+#spring.datasource.url=jdbc:mysql://localhost/test spring.datasource.username=dbuser spring.datasource.password=dbpass ...
+#spring:
+spring:
+  datasource:
+    platform: h2
+    url: jdbc:h2:mem:test
+  spring.thymeleaf.cache: false
+#    password:
+#    driver-class-name: com.mysql.jdbc.Driver
+spring:
+  h2:
+    console:
+      enabled: true
+logging:
+  level:
+    com.demo.spring_security: DEBUG

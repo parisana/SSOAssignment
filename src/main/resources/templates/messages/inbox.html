@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Home Page</title>
+    <script src="/webjars/jquery/3.2.1/jquery.min.js" ></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-beta/css/bootstrap.min.css}">
+    <!--<script src="/jquery/jquery-3.2.1.min.js" ></script>-->
+    <script th:src="@{/webjars/bootstrap/4.0.0-beta/js/bootstrap.min.js}"></script>
+    <script src="/webjars/popper.js/1.12.9/dist/popper.min.js" th:src="@{/webjars/popper.js/1.12.9/dist/popper.min.js}"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-light bg-faded" th:with="currentUser=${currentUser}">
+            <div class="navbar" style="width:100%" th:if="${currentUser!=null}">
+                <ul class="navbar-nav" style="display:inline">
+                    <li style="display:inline; padding:0 5px 10px 5px"><a th:href="@{/messages/inbox}">Inbox</a></li>
+                    <li style="display:inline; padding:5px 10px"><a th:href="@{/messages/compose(form)}">Compose</a></li>
+                    <li style="display:inline; padding:5px 10px"><a th:href="@{/h2-console}">H2-DB</a></li>
+                </ul>
+                <div  style="float:right; display:inline-block; margin-left:auto">
+                    <div  style="float:left; display:inline-block; margin-left:auto; padding: 5px 10px">
+                        <h6 class="navbar-text" th:text="${currentUser.firstName}">sample_user</h6>
+                    </div>
+                    <form class="form-inline" th:action="@{/login(logout)}" method="post">
+                        <button class="btn btn-primary" type="submit">Log-out</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <table class="table table-inverse">
+            <thead>
+                <tr>
+                    <th>Message</th>
+                    <th>Date Received</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody th:if="${messages.isEmpty()}">
+                <tr>
+                    <td>
+                        No messages.
+                    </td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr class="" th:each="message: ${messages}">
+                    <td th:text="${message.text}"></td>
+                    <td th:text="${message.created.getTime()}"></td>
+                    <td><a th:href="@{'/messages/show/'+${message.id}}">View</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

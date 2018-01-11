@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:float="http://www.w3.org/1999/xhtml" xmlns:tiles="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Home Page</title>
+    <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-beta/css/bootstrap.min.css}">
+    <script th:src="@{/webjars/bootstrap/4.0.0-beta/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container" style="width:450px; margin:auto;">
+    <div class="segment-oauth" style="margin: 5px 0; padding:20px 20px; border: 1px solid #333">
+        <div style="padding:6px 20px"><a th:href="@{/#}">Google</a></div>
+    </div>
+    <div class="segment-form" style="border:1px solid #000">
+        <h5 style="color:#333; padding:10px 10px; font-weight:bold">Register</h5>
+        <form class="" style="padding:10px 10px" name="f" th:action="@{/signup}" th:object="${user}" method="post">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input class="form-control"  id="firstName" type="text" th:field="*{firstName}"/>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input class="form-control"  id="lastName" type="text" th:field="*{lastName}"/>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input class="form-control"  id="email" type="text" th:field="*{email}"/>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input class="form-control"  id="password" type="password" th:field="*{password}"/>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn">Sign Up</button>
+            </div>
+        </form>
+    </div>
+    <div class="segment-login" style="margin-top: 5px; padding:20px 20px; border: 1px solid #333">
+        <div style="padding:6px 20px">Already have an account? <a th:href="@{/login}">Login</a></div>
+    </div>
+</div>
+</body>
+</html>

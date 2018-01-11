@@ -1,0 +1,6 @@
+--DROP table USERS;
+--CREATE table USERS(
+--                  username VARCHAR2(255) UNIQUE NOT NULL,
+--                  password VARCHAR2(255) DEFAULT NULL,
+--                  enabled BIT(2),
+--                  PRIMARY KEY (username));

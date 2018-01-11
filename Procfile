@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar build/libs/spring_security-0.0.1-SNAPSHOT.jar

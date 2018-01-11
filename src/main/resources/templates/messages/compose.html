@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Compose Message</title>
+    <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-beta/css/bootstrap.min.css}">
+    <script th:src="@{/webjars/bootstrap/4.0.0-beta/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-light bg-faded" th:with="currentUser=${currentUser}">
+        <div class="navbar" style="width:100%" th:if="${currentUser!=null}">
+            <ul class="navbar-nav" style="display:inline">
+                <li style="display:inline; padding:0 5px 10px 5px"><a th:href="@{/messages/inbox}">Inbox</a></li>
+                <li style="display:inline; padding:5px 10px"><a th:href="@{/messages/compose(form)}">Compose</a></li>
+                <li style="display:inline; padding:5px 10px"><a th:href="@{/h2-console}">H2-DB</a></li>
+            </ul>
+            <div  style="float:right; display:inline-block; margin-left:auto">
+                <div  style="float:left; display:inline-block; margin-left:auto; padding: 5px 10px">
+                    <h6 class="navbar-text" th:text="${currentUser.firstName}">sample_user</h6>
+                </div>
+                <form class="form-inline" th:action="@{/logout}" method="post">
+                    <button class="btn btn-primary" type="submit">Log-out</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="segment" style="width:600px; border: 1px solid #333; padding: 5px; margin:auto">
+        <h1>Messages : Compose</h1>
+        <form id="messageForm" th:action="@{/messages/compose}" th:object="${messageForm}" method="post">
+            <div th:if="${#fields.hasErrors('*')}" class="alert alert-warning">
+                <p th:each="error : ${#fields.errors('*')}" th:text="${error}">
+                    Validation error
+                </p>
+            </div>
+            <div class="form-group">
+                <label for="to">To</label>
+                <input placeholder="Send To Email" type="text" name="to" class="form-control" id="to" th:field="*{toEmail}" th:class="${#fields.hasErrors('toEmail')} ? 'field-error'"/>
+            </div>
+            <div class="form-group">
+                <label for="summary">Summary</label>
+                <input placeholder="Summary/Subject" class="form-control" type="text" name="summary" id="summary"/>
+            </div>
+            <div class="form-group">
+                <label for="text">Message</label>
+                <textarea style="width:100%" name="text" id="text" th:field="*{text}" th:class="${#fields.hasErrors('text')} ? 'field-error'"></textarea>
+            </div>
+            <div class="form-group" style="width:100%; height:50px"><button type="submit" class="btn btn-primary" style="margin-left:auto; float:right; width:100px">Send</button></div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
