@@ -58,8 +58,8 @@ class OAuth2LoginConfig{
     // configure google client registration
     private ClientRegistration googleClientRegistration() {
         return ClientRegistration.withRegistrationId("google")
-                .clientId("1043638449981-117tt5gee100p3a9u523thqjl439b1tc.apps.googleusercontent.com")
-                .clientSecret("a8SAbZVomY7m2ekj9s-CUmQI")
+                .clientId("CLIENT_ID")
+                .clientSecret("CLIENT_SECRET")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .redirectUriTemplate("{baseUrl}/login/oauth2/code/{registrationId}")
